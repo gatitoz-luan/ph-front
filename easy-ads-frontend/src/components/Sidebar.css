@@ -1,0 +1,129 @@
+/* Sidebar.css */
+
+/* Sidebar Container */
+.sidebar {
+    height: 100vh;
+    background-color: #f5f5f5;
+    padding: 20px;
+    transition: width 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    border-radius: 30px;
+    margin: 0 20px 0 10px;
+}
+
+.sidebar.expanded {
+    width: 220px;
+}
+
+.sidebar.collapsed {
+    width: 60px;
+    align-items: center;
+    padding: 10px 0; /* Ajuste o padding quando colapsado */
+}
+
+/* Botão de Colapso (fixo) */
+.toggle-btn {
+    background: none;
+    border: none;
+    font-size: 1.2rem;
+    cursor: pointer;
+    position: absolute;
+    top: 10px; /* Ajuste a posição vertical do botão */
+    left: 10px; /* Mantém o botão na mesma posição horizontal */
+    z-index: 10; /* Garante que o botão esteja acima dos outros elementos */
+}
+
+/* Header */
+.sidebar-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    margin-bottom: 1rem;
+}
+
+.logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #333;
+}
+
+/* Seção de Canais e Menu */
+.sidebar-section {
+    width: 100%;
+    text-align: left;
+    margin-top: 1rem;
+}
+
+.section-title {
+    font-size: 0.9rem;
+    font-weight: bold;
+    color: #777;
+    margin-bottom: 0.5rem;
+}
+
+/* Ícones de Canais */
+.channel-icons {
+    display: flex;
+    gap: 2rem;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.channel-icons.horizontal {
+    flex-direction: row;
+}
+
+.channel-icons.vertical {
+    flex-direction: column;
+}
+
+/* Ícones e Lista de Menus */
+.sidebar-icon {
+    font-size: 1.5rem;
+    color: #333;
+}
+
+.menu-list {
+    list-style: none;
+    padding: 0;
+    width: 100%;
+}
+
+.menu-list li {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    justify-content: left;
+    transition: all 0.3s ease;
+}
+
+.menu-list li:hover {
+    background-color: #e0e0e0;
+    border-radius: 5px;
+}
+
+/* Remover gap e padding quando colapsado */
+.sidebar.collapsed .menu-list li {
+    gap: 0;
+    padding: 0.5rem 0;
+    justify-content: center;
+}
+
+/* Menu Item Text */
+.menu-list li span {
+    font-size: 0.9rem;
+    color: #333;
+}
+
+/* Modo Colapsado: Apenas ícones centralizados */
+.sidebar.collapsed .section-title,
+.sidebar.collapsed .menu-list li span {
+    display: none;
+}

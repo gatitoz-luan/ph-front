@@ -1,19 +1,25 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Login from './pages/Login';
+import App from './App';
+import Home from './pages/Home';
 import Dashboard from './pages/Dashboard';
-import AuthCallback from './pages/AuthCallback';
-import NotFound from './pages/NotFound'; // Certifique-se de que o caminho está correto
+import CampaignCreation from './pages/CampaignCreation';
+import CreativeManagement from './pages/CreativeManagement';
+import CreativeRequest from './pages/CreativeRequest';
+import NotFound from './pages/NotFound';
 
-const AppRouter = () => {
+const AppRouter: React.FC = () => {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<Login />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/dashboard" element={<Dashboard />} />
-        <Route path="/auth/callback" element={<AuthCallback />} />
-        <Route path="*" element={<NotFound />} /> {/* Rota para páginas não encontradas */}
+        <Route path="/" element={<App />}>
+          <Route index element={<Home />} /> {/* Página inicial */}
+          <Route path="dashboard" element={<Dashboard />} />
+          <Route path="campaign-creation" element={<CampaignCreation />} />
+          <Route path="creative-management" element={<CreativeManagement />} />
+          <Route path="creative-request" element={<CreativeRequest />} />
+          <Route path="*" element={<NotFound />} /> {/* Qualquer rota inválida */}
+        </Route>
       </Routes>
     </Router>
   );
