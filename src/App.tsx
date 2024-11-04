@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { Routes, Route, useNavigate } from 'react-router-dom';
-import { RootState } from './store';
+import { useDispatch } from 'react-redux';
+import { Routes, Route } from 'react-router-dom';
 import { setUser } from './store/authSlice';
 import supabase from './services/supabaseClient';
 import Home from './pages/Home';
@@ -10,8 +9,6 @@ import PrivateRoute from './PrivateRoute';
 
 const App = () => {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
-  const user = useSelector((state: RootState) => state.auth.user);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
