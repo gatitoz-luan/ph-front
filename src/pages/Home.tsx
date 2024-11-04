@@ -57,7 +57,7 @@ const Home: React.FC = () => {
     <Sidebar isOpen={isSidebarOpen} toggleSidebar={function (): void {
     setIsSidebarOpen(!isSidebarOpen);
   } } />
-<div>      <h2 className="page-title">Campanhas de Tráfego Pago</h2>
+<div >      <h2 className="page-title">Campanhas de Tráfego Pago</h2>
 
       <table className="campaign-table">
         <thead>

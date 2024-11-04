@@ -106,4 +106,9 @@
   .action-button:active {
     transform: translateY(1px);
   }
+  .side-and-content {
+    display: flex;
+    height: 100vh;
+    font-family: Arial, sans-serif;
+  }
   

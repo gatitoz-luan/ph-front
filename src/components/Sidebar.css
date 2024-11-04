@@ -32,7 +32,7 @@
     cursor: pointer;
     position: absolute;
     top: 10px; /* Ajuste a posição vertical do botão */
-    left: 10px; /* Mantém o botão na mesma posição horizontal */
+    left: 18px; /* Mantém o botão na mesma posição horizontal */
     z-index: 10; /* Garante que o botão esteja acima dos outros elementos */
 }
 
@@ -41,7 +41,6 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 100%;
     margin-bottom: 1rem;
 }
 
