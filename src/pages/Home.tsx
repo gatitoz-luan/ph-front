@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { FaEdit, FaChartLine, FaEye } from 'react-icons/fa';
+import { FaEdit, FaChartLine } from 'react-icons/fa';
 import './Home.css';
+import Sidebar from '../components/Sidebar';
+import Header from '../components/Header';
 
 interface Campaign {
   id: number;
@@ -42,10 +44,20 @@ const Home: React.FC = () => {
   const handleCampaignClick = (id: number) => {
     navigate(`/configurations/${id}`);
   };
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+
+
 
   return (
+
+
     <div className="home-content">
-      <h2 className="page-title">Campanhas de Tráfego Pago</h2>
+          <Header />
+<div className='side-and-content'>
+    <Sidebar isOpen={isSidebarOpen} toggleSidebar={function (): void {
+    setIsSidebarOpen(!isSidebarOpen);
+  } } />
+<div>      <h2 className="page-title">Campanhas de Tráfego Pago</h2>
 
       <table className="campaign-table">
         <thead>
@@ -86,7 +98,8 @@ const Home: React.FC = () => {
           ))}
         </tbody>
       </table>
-    </div>
+    </div></div></div>
+
   );
 };
 

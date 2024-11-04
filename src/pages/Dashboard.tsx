@@ -6,7 +6,7 @@ import StatisticsChart from '../components/StatisticsChart';
 import { Campaign } from '../types';
 
 const Dashboard: React.FC = () => {
-    const [campaigns, setCampaigns] = useState<Campaign[]>([]);
+    const [campaigns] = useState<Campaign[]>([]);
 
     useEffect(() => {
         // Buscar campanhas e métricas aqui
