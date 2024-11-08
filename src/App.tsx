@@ -5,7 +5,15 @@ import { setUser } from './store/authSlice';
 import supabase from './services/supabaseClient';
 import Home from './pages/Home';
 import Login from './pages/Login';
+import Campaigns from './pages/Campaigns';
+import Reports from './pages/Reports';
+import Gallery from './pages/Gallery';
+import Tips from './pages/Tips';
+import Settings from './pages/Settings';
+import Profile from './pages/Profile';
+import NewProject from './pages/NewProject';
 import PrivateRoute from './PrivateRoute';
+import Accounts from './pages/Accounts';
 
 const App = () => {
   const dispatch = useDispatch();
@@ -15,7 +23,6 @@ const App = () => {
     const checkSession = async () => {
       console.log('Iniciando checkSession');
 
-      // Verifica se há tokens no hash da URL
       const hash = window.location.hash;
       console.log('Hash da URL:', hash);
 
@@ -38,18 +45,23 @@ const App = () => {
         } else {
           const { data: sessionData } = await supabase.auth.getSession();
           if (sessionData?.session) {
-            dispatch(setUser(sessionData.session.user));
+            dispatch(
+              setUser({
+                user: sessionData.session.user,
+                profileImage: sessionData.session.user.user_metadata.avatar_url, // Salva a imagem do perfil
+              })
+            );
           }
         }
       }
 
-      setIsLoading(false); // Sessão verificada, carregamento concluído
+      setIsLoading(false); // Conclui o carregamento após verificar a sessão
     };
 
     checkSession();
   }, [dispatch]);
 
-  // Renderiza um indicador de carregamento enquanto a verificação da sessão está em andamento
+  // Exibe uma mensagem de carregamento enquanto verifica a sessão
   if (isLoading) {
     return <div>Carregando...</div>;
   }
@@ -65,6 +77,71 @@ const App = () => {
           </PrivateRoute>
         }
       />
+      <Route
+        path="/campaigns"
+        element={
+          <PrivateRoute>
+            <Campaigns />
+          </PrivateRoute>
+        }
+      />
+      <Route
+        path="/reports"
+        element={
+          <PrivateRoute>
+            <Reports />
+          </PrivateRoute>
+        }
+      />
+      <Route
+        path="/gallery"
+        element={
+          <PrivateRoute>
+            <Gallery />
+          </PrivateRoute>
+        }
+      />
+      <Route
+        path="/tips"
+        element={
+          <PrivateRoute>
+            <Tips />
+          </PrivateRoute>
+        }
+      />
+      <Route
+        path="/settings"
+        element={
+          <PrivateRoute>
+            <Settings />
+          </PrivateRoute>
+        }
+      />
+      <Route
+        path="/profile"
+        element={
+          <PrivateRoute>
+            <Profile />
+          </PrivateRoute>
+        }
+      />
+      <Route
+        path="/new-project"
+        element={
+          <PrivateRoute>
+            <NewProject />
+          </PrivateRoute>
+        }
+      />
+      <Route
+        path="/accounts"
+        element={
+          <PrivateRoute>
+            <Accounts />
+          </PrivateRoute>
+        }
+      />
+
     </Routes>
   );
 };

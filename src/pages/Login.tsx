@@ -1,4 +1,4 @@
-import './Login.css';
+import './styles/Login.css';
 import { signInWithGoogle } from '../services/authService';
 
 const Login = () => {

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { FaEdit, FaChartLine } from 'react-icons/fa';
-import './Home.css';
+import './styles/Home.css';
 import Sidebar from '../components/Sidebar';
 import Header from '../components/Header';
 
@@ -52,7 +52,6 @@ const Home: React.FC = () => {
 
 
     <div className="home-content">
-          <Header />
 <div className='side-and-content'>
     <Sidebar isOpen={isSidebarOpen} toggleSidebar={function (): void {
     setIsSidebarOpen(!isSidebarOpen);

@@ -1,65 +1,102 @@
-import React from 'react';
-import { FaFacebook, FaGoogle, FaTiktok, FaBars } from 'react-icons/fa';
-import { RiDashboardLine, RiMoneyDollarCircleLine, RiFocusLine } from 'react-icons/ri';
-import 'bootstrap/dist/css/bootstrap.min.css';
+import React, { useState } from 'react';
+import { RiDashboardLine, RiMoneyDollarCircleLine, RiFocusLine, RiLineChartFill  } from 'react-icons/ri';
+import { Link, useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '../store/store';
 import './Sidebar.css';
+import { FaBars, FaSignOutAlt, FaUserCircle, FaCogs, FaLayerGroup, FaWallet } from 'react-icons/fa';
+import { logoutUser } from '../services/authService';
 
 interface SidebarProps {
   isOpen: boolean;
   toggleSidebar: () => void;
 }
 
+
 const Sidebar: React.FC<SidebarProps> = ({ isOpen, toggleSidebar }) => {
+  const profileImage = useSelector((state: RootState) => state.auth.profileImage);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const handleLogout = async () => {
+    await logoutUser(dispatch);
+    navigate('/login'); // Redireciona para a página de login após o logout
+  };
+
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
+  };
+
   return (
     <div className={`sidebar ${isOpen ? 'expanded' : 'collapsed'}`}>
       {/* Botão de Colapso */}
       <div className="sidebar-header">
-        <button
-          onClick={toggleSidebar}
-          className="toggle-btn"
-        >
+        <button onClick={toggleSidebar} className="toggle-btn">
           <FaBars />
         </button>
       </div>
 
-      {/* Seção de Canais */}
-      <div className="sidebar-section">
-        {isOpen && <p className="section-title">Canais</p>}
-        <div className={`channel-icons ${isOpen ? 'horizontal' : 'vertical'}`}>
-          <a href="#" className="nav-link py-3 " title="Facebook">
-            <FaFacebook size={24} />
-          </a>
-          <a href="#" className="nav-link py-3 " title="Google">
-            <FaGoogle size={24} />
-          </a>
-          <a href="#" className="nav-link py-3 " title="TikTok">
-            <FaTiktok size={24} />
-          </a>
+      {/* Imagem de Perfil e Menu Interativo */}
+      <div className="profile-container">
+        <div className="profile-image-wrapper" onClick={toggleMenu}>
+          {profileImage ? (
+            <img src={profileImage} alt="Profile" className="profile-image" />
+          ) : (
+            <span className="placeholder-icon">👤</span>
+          )}
         </div>
+        {isMenuOpen && (
+          <ul className="profile-menu">
+          <li>
+            <Link to="/new-project">
+              <FaLayerGroup className="dropdown-icon" /> Trocar workspace
+            </Link>
+          </li>
+          <li>
+            <Link to="/accounts">
+              <FaWallet className="dropdown-icon" /> Cadastrar contas
+            </Link>
+          </li>
+          <li>
+            <Link to="/settings">
+              <FaCogs className="dropdown-icon" /> Settings
+            </Link>
+          </li>
+          <li>
+            <Link to="/profile">
+              <FaUserCircle className="dropdown-icon" /> Profile
+            </Link>
+          </li>
+          <li><hr className="dropdown-divider" /></li>
+          <li>
+          <button onClick={handleLogout} className="logout-button">
+                <FaSignOutAlt className="dropdown-icon" /> Sign out
+              </button>
+          </li>
+        </ul>
+        )}
       </div>
 
       {/* Seção do Menu */}
-      <ul className="menu-list">
-        {isOpen && <p className="section-title">Menu</p>}
-        <li className="nav-item">
-          <a href="#" className="nav-link py-3" title="Painel">
-            <RiDashboardLine className="sidebar-icon" />
-            {isOpen && <span>Painel</span>}
-          </a>
-        </li>
-        <li>
-          <a href="#" className="nav-link py-3" title="Financeiro">
-            <RiMoneyDollarCircleLine className="sidebar-icon" />
-            {isOpen && <span>Financeiro</span>}
-          </a>
-        </li>
-        <li>
-          <a href="#" className="nav-link py-3" title="Rastreamento">
-            <RiFocusLine className="sidebar-icon" />
-            {isOpen && <span>Rastreamento</span>}
-          </a>
-        </li>
-      </ul>
+      <div className="menu-section">
+        <Link to="/dashboard" className="menu-item">
+          <RiDashboardLine className="sidebar-icon" />
+          {isOpen && <span>Painel</span>}
+        </Link>
+        <Link to="/dashboard" className="menu-item">
+          <RiLineChartFill  className="sidebar-icon" />
+          {isOpen && <span>Dashboard</span>}
+        </Link>
+        <Link to="/finance" className="menu-item">
+          <RiMoneyDollarCircleLine className="sidebar-icon" />
+          {isOpen && <span>Financeiro</span>}
+        </Link>
+        <Link to="/tracking" className="menu-item">
+          <RiFocusLine className="sidebar-icon" />
+          {isOpen && <span>Rastreamento</span>}
+        </Link>
+      </div>
     </div>
   );
 };

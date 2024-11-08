@@ -8,10 +8,10 @@
     transition: width 0.3s ease;
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: flex-start;
     position: relative;
-    border-radius: 30px;
-    margin: 0 20px 0 10px;
+    border-radius: 10px;
+    margin-right: 4rem;
 }
 
 .sidebar.expanded {
@@ -21,108 +21,139 @@
 .sidebar.collapsed {
     width: 60px;
     align-items: center;
-    padding: 10px 0; /* Ajuste o padding quando colapsado */
+    padding: 10px 0;
 }
 
-/* Botão de Colapso (fixo) */
+/* Botão de Colapso */
 .toggle-btn {
     background: none;
     border: none;
-    font-size: 1.2rem;
+    font-size: 1.5rem;
     cursor: pointer;
     position: absolute;
-    top: 10px; /* Ajuste a posição vertical do botão */
-    left: 18px; /* Mantém o botão na mesma posição horizontal */
-    z-index: 10; /* Garante que o botão esteja acima dos outros elementos */
-}
-
-/* Header */
-.sidebar-header {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 1rem;
-}
-
-.logo {
-    font-size: 1.5rem;
-    font-weight: bold;
+    top: 20px;
+    left: 15px;
     color: #333;
 }
 
-/* Seção de Canais e Menu */
-.sidebar-section {
+/* Profile Section */
+.profile-container {
+    position: relative;
+    margin: 4rem 0 2rem;
     width: 100%;
-    text-align: left;
-    margin-top: 1rem;
-}
-
-.section-title {
-    font-size: 0.9rem;
-    font-weight: bold;
-    color: #777;
-    margin-bottom: 0.5rem;
-}
-
-/* Ícones de Canais */
-.channel-icons {
     display: flex;
-    gap: 2rem;
     justify-content: center;
-    align-items: center;
-    margin-bottom: 1rem;
 }
 
-.channel-icons.horizontal {
-    flex-direction: row;
+.profile-image-wrapper {
+    cursor: pointer;
 }
 
-.channel-icons.vertical {
+.profile-image {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    transition: transform 0.3s ease;
+}
+
+.profile-image-wrapper:hover .profile-image {
+    transform: scale(1.1);
+}
+
+/* Profile Menu */
+.profile-menu {
+    position: absolute;
+    top: 60px;
+    left: 0;
+    width: auto;
+    background-color: #ffffff;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    animation: fade-in 0.3s ease;
+}
+
+
+
+.dropdown-divider {
+    margin: 0;
+    border-top: 1px solid #e0e0e0;
+}
+
+/* Animação de Fade-in */
+@keyframes fade-in {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Menu Section */
+.menu-section {
+    width: 100%;
+    display: flex;
     flex-direction: column;
+    gap: 1rem;
 }
 
-/* Ícones e Lista de Menus */
+.menu-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    color: #333;
+    font-size: 1rem;
+    text-decoration: none;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    padding: 10px;
+    border-radius: 8px;
+    width: 100%;
+}
+
+.menu-item:hover {
+    background-color: #e0e0e0;
+    color: #007bff;
+}
+
 .sidebar-icon {
     font-size: 1.5rem;
     color: #333;
 }
 
-.menu-list {
-    list-style: none;
-    padding: 0;
-    width: 100%;
+.menu-item span {
+    display: inline-block;
 }
 
-.menu-list li {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    padding: 0.5rem 1rem;
-    cursor: pointer;
-    justify-content: left;
-    transition: all 0.3s ease;
+.sidebar.collapsed .menu-item span {
+    display: none; /* Esconde o texto quando a sidebar está colapsada */
 }
 
-.menu-list li:hover {
-    background-color: #e0e0e0;
-    border-radius: 5px;
-}
-
-/* Remover gap e padding quando colapsado */
-.sidebar.collapsed .menu-list li {
-    gap: 0;
-    padding: 0.5rem 0;
+/* Remover padding e centralizar quando colapsado */
+.sidebar.collapsed .menu-item {
     justify-content: center;
 }
-
-/* Menu Item Text */
-.menu-list li span {
-    font-size: 0.9rem;
+/* Dropdown Icons */
+.dropdown-icon {
+    margin-right: 8px;
+    font-size: 1rem;
     color: #333;
+    vertical-align: middle;
 }
 
-/* Modo Colapsado: Apenas ícones centralizados */
-.sidebar.collapsed .section-title,
-.sidebar.collapsed .menu-list li span {
-    display: none;
+.profile-menu li a {
+    display: flex;
+    align-items: center;
+    color: #333;
+    text-decoration: none;
+    padding: 8px 10px;
+    transition: background-color 0.3s ease;
+}
+
+.profile-menu li a:hover {
+    background-color: #f0f0f0;
 }
